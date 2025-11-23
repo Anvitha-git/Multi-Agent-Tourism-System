@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import tourism
 from .utils.logging import setup_logging
+import os
 
 setup_logging()
 
