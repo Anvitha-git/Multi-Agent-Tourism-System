@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: theme('fontFamily.sans');
+  /* Dark elegant travel gradient (deep navy -> muted teal) with subtle warm accent */
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255,127,17,0.18), transparent 65%),
+    radial-gradient(circle at 12% 88%, rgba(27,108,168,0.25), transparent 60%),
+    linear-gradient(135deg, #081C2E 0%, #0D2535 42%, #123444 68%, #153C4C 85%, #163E4F 100%);
+  /* Texture hint using subtle translucent stripes */
+  background-blend-mode: overlay, overlay, normal;
+  color: #2E2E2E;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.travel-container {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.travel-card {
+  @apply bg-white/95 backdrop-blur-sm rounded-xl shadow-soft hover:shadow-elevate transition-shadow duration-300;
+}
+
+.travel-btn-primary {
+  @apply bg-travel-orange text-white font-semibold rounded-md px-6 py-3 shadow-soft hover:shadow-elevate hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-travel-orange transition;
+}
+
+.travel-input {
+  @apply w-full rounded-lg border border-travel-blue/30 focus:border-travel-blue focus:ring-2 focus:ring-travel-blue/40 px-4 py-3 shadow-soft bg-white/90 placeholder-gray-500 outline-none transition;
+}
+
+.travel-heading {
+  @apply text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white drop-shadow;
+}
+
+.travel-subheading {
+  @apply text-lg md:text-xl text-travel-beige/90 mt-3 max-w-2xl;
+}
+
+/* Result card enhancements */
+.travel-result-card {
+  @apply relative overflow-hidden rounded-xl p-5 sm:p-6 md:p-7 shadow-soft bg-gradient-to-br from-white via-travel-beige/40 to-travel-blue/5 border border-travel-blue/10;
+}
+.travel-result-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 15%, rgba(255,127,17,0.15), transparent 60%), radial-gradient(circle at 10% 90%, rgba(10,61,98,0.12), transparent 55%);
+  pointer-events: none;
+}
+.travel-badge {
+  @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-travel-blue/10 text-travel-blue uppercase tracking-wide;
+}
+.travel-section-title {
+  @apply flex items-center gap-2 text-sm font-semibold text-travel-blue mt-4 mb-2 uppercase tracking-wide;
+}
+.travel-divider {
+  @apply h-px w-full bg-gradient-to-r from-travel-blue/10 via-travel-orange/30 to-transparent my-4;
+}
+.forecast-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-2;
+}
+.forecast-item {
+  @apply rounded-lg bg-white/70 backdrop-blur-sm px-2.5 py-2 shadow-soft border border-travel-blue/10 flex flex-col gap-0.5 text-[10px] sm:text-xs;
+}
+.forecast-item span:first-child { @apply font-semibold text-travel-blue text-xs; }
+.attraction-list {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2;
+}
+.attraction-item { @apply flex items-start gap-2 text-sm bg-white/70 rounded-lg px-3 py-2 shadow-soft border border-travel-blue/10; }
+.attraction-bullet { @apply w-1.5 h-1.5 mt-1.5 rounded-full bg-travel-orange flex-shrink-0; }
+
+/* Travel loader */
+@keyframes plane-move {
+  0% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(55%) rotate(2deg); }
+  100% { transform: translateX(110%) rotate(0deg); }
+}
+@keyframes cloud-fade {
+  0% { opacity: 0; transform: translateY(4px); }
+  25% { opacity: .6; }
+  75% { opacity: .6; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+.travel-loader-wrapper { @apply relative w-full h-16 mt-4 overflow-hidden; }
+.travel-loader-track { @apply absolute left-0 top-1/2 w-full h-px bg-gradient-to-r from-travel-blue/10 via-travel-orange/40 to-travel-blue/10; }
+.travel-loader-plane { @apply absolute top-1/2 -translate-y-1/2 text-travel-orange; animation: plane-move 2.2s linear infinite; }
+.travel-cloud { @apply absolute w-6 h-6 bg-white/70 rounded-full shadow-soft; animation: cloud-fade 2.2s linear infinite; }
+.travel-cloud:nth-child(2) { left:25%; animation-delay:.3s; }
+.travel-cloud:nth-child(3) { left:55%; animation-delay:.9s; }
+.travel-cloud:nth-child(4) { left:80%; animation-delay:1.4s; }
