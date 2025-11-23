@@ -20,4 +20,12 @@ app.add_middleware(
 	allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+	return {"message": "Multi-Agent Tourism System API", "status": "running"}
+
+@app.get("/health")
+async def health_check():
+	return {"status": "healthy"}
+
 app.include_router(tourism.router, prefix="/api/v1/tourism", tags=["Tourism"])
