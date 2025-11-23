@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: multi-agent-tourism-backend
+    env: python
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
+    runtime: python
+    region: oregon
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: LOG_LEVEL
+        value: info
+    healthCheckPath: /docs
+    routes:
+      - type: rewrite
+        source: /api/(.*)
+        destination: /api/$1
